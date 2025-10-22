@@ -1,12 +1,10 @@
 const express = require("express");
+const cors = require("cors");
+const routes = require("./routes");
+
 const app = express();
 
-const PORT = 8080;
+app.use(cors());
+app.use("/api/summoner", routes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+module.exports = app;
