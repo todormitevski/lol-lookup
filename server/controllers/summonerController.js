@@ -14,6 +14,8 @@ const {
   mainChampionCache,
 } = require("../services/cacheService");
 
+const { getRegionValue } = require("../config/regions");
+
 exports.getSummoner = async (req, res) => {
   try {
     const { region, gameName, tagLine } = req.params;
@@ -43,17 +45,19 @@ exports.getSummoner = async (req, res) => {
       accountResponse.data.puuid
     );
 
+    const regionValue = getRegionValue(region);
+
     if (summonerResponse.statusCode === 404) {
       return res.status(404).json({
         error: "Summoner not found in region",
-        message: `No results found for summoner with id ${gameName}#${tagLine} in region ${region.toUpperCase()}`,
+        message: `No results found for summoner with id ${gameName}#${tagLine} in region ${regionValue.toUpperCase()}`,
       });
     }
 
     const summonerDto = new SummonerDto(
       accountResponse.data,
       summonerResponse.data,
-      region
+      regionValue
     );
 
     summonerCache.set(cacheKey, summonerDto);

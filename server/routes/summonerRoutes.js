@@ -1,13 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  summonerCache,
-  rankCache,
-  matchIdsCache,
-  matchCache,
-  mainChampionCache,
-} = require("../services/cacheService");
+const cacheService = require("../services/cacheService");
 
 const summonerController = require("../controllers/summonerController");
 
@@ -19,11 +13,11 @@ router.get("/:region/:gameName/:tagLine", summonerController.getSummoner);
 
 router.get("/cache", (_, res) => {
   res.json({
-    summoner: summonerCache.getStats(),
-    rank: rankCache.getStats(),
-    matchIds: matchIdsCache.getStats(),
-    match: matchCache.getStats(),
-    mainChampion: mainChampionCache.getStats(),
+    summoner: cacheService.summonerCache.getStats(),
+    rank: cacheService.rankCache.getStats(),
+    matchIds: cacheService.matchIdsCache.getStats(),
+    match: cacheService.matchCache.getStats(),
+    mainChampion: cacheService.mainChampionCache.getStats(),
   });
 });
 

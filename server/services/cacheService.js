@@ -31,7 +31,17 @@ const mainChampionCache = new NodeCache({
 });
 
 function generateCacheKey(...parts) {
-  return parts.map((p) => String(p).toLowerCase()).join(":");
+  return parts
+    .map((p) => String(p).toLowerCase().replaceAll(/\s+/g, ""))
+    .join(":");
+}
+
+function flushCache() {
+  summonerCache.flushAll();
+  rankCache.flushAll();
+  matchIdsCache.flushAll();
+  matchCache.flushAll();
+  mainChampionCache.flushAll();
 }
 
 module.exports = {
@@ -41,4 +51,5 @@ module.exports = {
   matchCache,
   mainChampionCache,
   generateCacheKey,
+  flushCache,
 };
