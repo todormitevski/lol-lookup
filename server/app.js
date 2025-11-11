@@ -1,12 +1,24 @@
 const express = require("express");
+const cors = require("cors");
+const {
+  perSecondLimiter,
+  perMinuteLimiter,
+} = require("./middleware/rateLimiter");
+const summonerRoutes = require("./routes/summonerRoutes");
+
 const app = express();
 
-const PORT = 8080;
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "development"
+      ? ["http://localhost:3000"]
+      : ["https://lol-lookup.vercel.app"],
+  methods: ["GET"],
+};
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use(cors(corsOptions));
+app.use("/api", perSecondLimiter);
+app.use("/api", perMinuteLimiter);
+app.use("/api/summoner", summonerRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+module.exports = app;
