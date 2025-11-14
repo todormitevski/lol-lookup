@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
-import RootLayout from "../components/layout/RootLayout/RootLayout";
-import Home from "../pages/Home/Home";
-import Summoner from "../pages/Summoner/Summoner";
+import RootLayout from "@/components/layout/RootLayout";
+import Home from "@/pages/Home";
+import Summoner from "@/pages/Summoner";
 
 export default function AppRoutes() {
   return (

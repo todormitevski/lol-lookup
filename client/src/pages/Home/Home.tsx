@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      <img src="" alt="LolLookup" />
+      <h1>LolLookup</h1>
     </main>
   );
 }
