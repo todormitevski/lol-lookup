@@ -1,0 +1,24 @@
+.placeholderStyles {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    color: ghostwhite;
+  }
+
+  h1 {
+    font-size: 100px;
+  }
+
+  input {
+    width: 700px;
+    height: 45px;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: gray;
+  }
+}
