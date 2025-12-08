@@ -1,0 +1,11 @@
+.placeholderColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.placeholderRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

@@ -1,43 +1,51 @@
-import type { SummonerDto } from "@/types";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
+import RankStats from "@/components/ui/RankStats";
+import MatchList from "@/components/ui/MatchList";
+import useApi from "@/hooks/useApi";
+
+import classes from "./Summoner.module.css";
 
 export default function Summoner() {
-  const [summonerData, setSummonerData] = useState<SummonerDto | null>();
   const { region, gameName, tagLine } = useParams();
+  const [baseLoading, packedData, error] = useApi(region!, gameName!, tagLine!);
 
-  useEffect(() => {
-    async function fetchSummonerData() {
-      const response: Response = await fetch(
-        `http://localhost:8080/api/summoner/${region}/${gameName}/${tagLine}`
-      );
+  if (error) {
+    return (
+      <div>
+        <h3>{error.name}</h3>
+        <h4>{error.message}</h4>
+      </div>
+    );
+  }
 
-      const data = await response.json();
-      setSummonerData(data);
-    }
+  if (baseLoading || !packedData) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
 
-    fetchSummonerData();
-  }, [region, gameName, tagLine]);
-
-  console.log(summonerData);
+  const {
+    summonerData,
+    championMasteryData,
+    rankLoading,
+    rankData,
+    matchIdsData,
+  } = packedData;
 
   return (
     <section>
-      <h1>
-        {region} {gameName} {tagLine}
-      </h1>
-      <br />
-
-      <div>
-        <p>{summonerData?.puuid}</p>
-        <p>{summonerData?.region}</p>
-        <p>{summonerData?.gameName}</p>
-        <p>{summonerData?.tagLine}</p>
-        <p>{summonerData?.summonerLevel}</p>
-        <p>{summonerData?.profileIconId}</p>
-        <img
-          src={`https://ddragon.leagueoflegends.com/cdn/15.23.1/img/profileicon/${summonerData?.profileIconId}.png`}
+      <div className={classes.placeholderColumn}>
+        <BaseSummonerHero
+          data={summonerData}
+          mainChampId={championMasteryData.mainChampionId}
         />
+        <div className={classes.placeholderRow}>
+          <RankStats loading={rankLoading} data={rankData} />
+          <MatchList data={matchIdsData} />
+        </div>
       </div>
     </section>
   );
