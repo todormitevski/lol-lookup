@@ -9,10 +9,7 @@ const summonerRoutes = require("./routes/summonerRoutes");
 const app = express();
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "development"
-      ? ["http://localhost:3000"]
-      : ["https://lol-lookup.vercel.app"],
+  origin: process.env.BASE_URL,
   methods: ["GET"],
 };
 
