@@ -2,7 +2,7 @@ import type { RankDto } from "@/types";
 
 type Props = {
   loading: boolean;
-  data: RankDto;
+  data: RankDto | null;
 };
 
 export default function RankStats({ loading, data }: Props) {

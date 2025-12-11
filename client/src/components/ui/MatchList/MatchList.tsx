@@ -1,7 +1,7 @@
 import type { MatchIds } from "@/types";
 
 type Props = {
-  data: MatchIds;
+  data: MatchIds | null;
 };
 
 export default function MatchList({ data }: Props) {

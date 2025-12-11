@@ -9,23 +9,23 @@ import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 type PackedData = {
-  summonerData: SummonerDto;
-  championMasteryData: ChampionMasteryDto;
+  summonerData: SummonerDto | null;
+  championMasteryData: ChampionMasteryDto | null;
   rankLoading: boolean;
-  rankData: RankDto;
-  matchIdsData: MatchIds;
+  rankData: RankDto | null;
+  matchIdsData: MatchIds | null;
 };
 
-type ApiHookResult = [
-  baseLoading: boolean,
-  packedData: PackedData | null,
-  error: Error | null
-];
+type ApiHookResult = {
+  baseLoading: boolean;
+  packedData: PackedData;
+  error: Error | null;
+};
 
 export default function useApi(
-  region: string,
-  gameName: string,
-  tagLine: string
+  region: string | undefined,
+  gameName: string | undefined,
+  tagLine: string | undefined
 ): ApiHookResult {
   const [baseLoading, setBaseLoading] = useState<boolean>(true);
   const [rankLoading, setRankLoading] = useState<boolean>(false);
@@ -60,26 +60,23 @@ export default function useApi(
 
         setRankLoading(true);
 
-        const rankRes = await api.get<RankDto>(
-          `/summoner/rank/${region}/${puuid}`
-        );
+        const [rankRes, matchIdsRes] = await Promise.all([
+          api.get<RankDto>(`/summoner/rank/${region}/${puuid}`),
+          api.get<MatchIds>(`/summoner/matches/${region}/${puuid}`),
+        ]);
         setRankData(rankRes.data);
+        setMatchIdsData(matchIdsRes.data);
 
         setRankLoading(false);
-
-        const matchIdsRes = await api.get<MatchIds>(
-          `/summoner/matches/${region}/${puuid}`
-        );
-        setMatchIdsData(matchIdsRes.data);
       } catch (error) {
         if (error instanceof AxiosError) {
-          const errorMessage =
+          const message =
             error.response?.data.message ||
             error.response?.data.error ||
             error.message ||
             "Something unexpected occurred";
 
-          setError(new Error(errorMessage));
+          setError(new Error(message));
         } else {
           setError(new Error("An unexpected error occurred"));
         }
@@ -97,21 +94,13 @@ export default function useApi(
     fetchData();
   }, [region, gameName, tagLine]);
 
-  if (error) {
-    return [false, null, error];
-  }
-
-  if (baseLoading || !summonerData || !championMasteryData) {
-    return [true, null, null];
-  }
-
   const packedData: PackedData = {
-    summonerData: summonerData,
-    championMasteryData: championMasteryData,
-    rankLoading: rankLoading,
-    rankData: rankData!,
-    matchIdsData: matchIdsData!,
+    summonerData,
+    championMasteryData,
+    rankLoading,
+    rankData,
+    matchIdsData,
   };
 
-  return [baseLoading, packedData, error];
+  return { baseLoading, packedData, error };
 }

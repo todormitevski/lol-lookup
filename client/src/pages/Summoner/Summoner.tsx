@@ -6,9 +6,22 @@ import useApi from "@/hooks/useApi";
 
 import classes from "./Summoner.module.css";
 
+type UrlParams = {
+  region: string;
+  gameName: string;
+  tagLine: string;
+};
+
 export default function Summoner() {
-  const { region, gameName, tagLine } = useParams();
-  const [baseLoading, packedData, error] = useApi(region!, gameName!, tagLine!);
+  const { region, gameName, tagLine } = useParams<UrlParams>();
+  const { baseLoading, packedData, error } = useApi(region, gameName, tagLine);
+  const {
+    summonerData,
+    championMasteryData,
+    rankLoading,
+    rankData,
+    matchIdsData,
+  } = packedData;
 
   if (error) {
     return (
@@ -19,21 +32,13 @@ export default function Summoner() {
     );
   }
 
-  if (baseLoading || !packedData) {
+  if (baseLoading || !summonerData || !championMasteryData) {
     return (
       <div>
         <h2>Loading...</h2>
       </div>
     );
   }
-
-  const {
-    summonerData,
-    championMasteryData,
-    rankLoading,
-    rankData,
-    matchIdsData,
-  } = packedData;
 
   return (
     <section>
