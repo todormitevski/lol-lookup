@@ -1,19 +1,19 @@
 export type Region =
-  | "eun1"
-  | "euw1"
-  | "tr1"
+  | "eun"
+  | "euw"
+  | "tr"
   | "ru"
-  | "na1"
-  | "br1"
-  | "la1"
-  | "la2"
+  | "na"
+  | "br"
+  | "lan"
+  | "las"
   | "kr"
-  | "jp1"
-  | "me1"
-  | "sg2"
-  | "tw2"
-  | "vn2"
-  | "oc1";
+  | "jp"
+  | "me"
+  | "sg"
+  | "tw"
+  | "vn"
+  | "oce";
 
 export type RegionDropdownOption = {
   value: Region;
@@ -21,19 +21,41 @@ export type RegionDropdownOption = {
 };
 
 export const REGION_DROPDOWN_OPTIONS: RegionDropdownOption[] = [
-  { value: "eun1", label: "EUN" },
-  { value: "euw1", label: "EUW" },
-  { value: "tr1", label: "TR" },
+  { value: "eun", label: "EUN" },
+  { value: "euw", label: "EUW" },
+  { value: "tr", label: "TR" },
   { value: "ru", label: "RU" },
-  { value: "na1", label: "NA" },
-  { value: "br1", label: "BR" },
-  { value: "la1", label: "LAN" },
-  { value: "la2", label: "LAS" },
+  { value: "na", label: "NA" },
+  { value: "br", label: "BR" },
+  { value: "lan", label: "LAN" },
+  { value: "las", label: "LAS" },
   { value: "kr", label: "KR" },
-  { value: "jp1", label: "JP" },
-  { value: "me1", label: "ME" },
-  { value: "sg2", label: "SG" },
-  { value: "tw2", label: "TW" },
-  { value: "vn2", label: "VN" },
-  { value: "oc1", label: "OCE" },
+  { value: "jp", label: "JP" },
+  { value: "me", label: "ME" },
+  { value: "sg", label: "SG" },
+  { value: "tw", label: "TW" },
+  { value: "vn", label: "VN" },
+  { value: "oce", label: "OCE" },
 ];
+
+export const REGION_DEFAULT_TAGLINE_VALUES: Record<Region, string> = {
+  eun: "EUNE",
+  euw: "EUW",
+  tr: "TR1",
+  ru: "RU1",
+  na: "NA1",
+  br: "BR1",
+  lan: "LAN",
+  las: "LAS",
+  kr: "KR1",
+  jp: "JP1",
+  me: "ME1",
+  sg: "SG2",
+  tw: "TW2",
+  vn: "VN2",
+  oce: "OC",
+};
+
+export function getRegionDefaultTagLineValue(regionValue: Region): string {
+  return REGION_DEFAULT_TAGLINE_VALUES[regionValue] || "EUNE";
+}
