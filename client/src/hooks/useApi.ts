@@ -5,6 +5,7 @@ import type {
   RankDto,
   SummonerDto,
 } from "@/types";
+import { ApiError } from "@/utils/ApiError";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ type PackedData = {
 type ApiHookResult = {
   baseLoading: boolean;
   packedData: PackedData;
-  error: Error | null;
+  error: ApiError | null;
 };
 
 export default function useApi(
@@ -36,7 +37,7 @@ export default function useApi(
   const [rankData, setRankData] = useState<RankDto | null>(null);
   const [matchIdsData, setMatchIdsData] = useState<MatchIds | null>(null);
 
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<ApiError | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -70,15 +71,15 @@ export default function useApi(
         setRankLoading(false);
       } catch (error) {
         if (error instanceof AxiosError) {
+          const title = error.response?.data.error || "Not Found";
           const message =
             error.response?.data.message ||
-            error.response?.data.error ||
             error.message ||
             "Something unexpected occurred";
 
-          setError(new Error(message));
+          setError(new ApiError(title, message));
         } else {
-          setError(new Error("An unexpected error occurred"));
+          setError(new ApiError("Not Found", "An unexpected error occurred"));
         }
 
         setSummonerData(null);

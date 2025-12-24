@@ -53,6 +53,7 @@ export default function SearchBar({ size = "default" }: Props) {
         placeholder={`Summoner game name + #${getRegionDefaultTagLineValue(
           regionValue
         )}`}
+        spellCheck={false}
         value={searchInput}
         onChange={handleSearchInputChange}
       />

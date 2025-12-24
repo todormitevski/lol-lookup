@@ -11,14 +11,6 @@
 
 @media (max-width: 768px) {
   .home {
-    padding: var(--spacing-md);
-    padding-top: 8vh;
-    gap: var(--spacing-xl);
-  }
-}
-
-@media (max-width: 480px) {
-  .home {
     padding: var(--spacing-sm);
     padding-top: 16vh;
     gap: var(--spacing-lg);

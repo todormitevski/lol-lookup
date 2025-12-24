@@ -1,0 +1,24 @@
+.homeButton {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  background-color: var(--color-accent);
+  transition: background-color 0.2s ease;
+}
+
+.homeButton:hover {
+  background-color: var(--color-accent-hover);
+}
+
+@media (max-width: 768px) {
+  .homeButton {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 0.9rem;
+  }
+}

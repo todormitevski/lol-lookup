@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
 import RankStats from "@/components/ui/RankStats";
 import MatchList from "@/components/ui/MatchList";
+import SummonerError from "@/components/ui/SummonerError";
 import useApi from "@/hooks/useApi";
 
 import classes from "./Summoner.module.css";
@@ -24,12 +25,7 @@ export default function Summoner() {
   } = packedData;
 
   if (error) {
-    return (
-      <div>
-        <h3>{error.name}</h3>
-        <h4>{error.message}</h4>
-      </div>
-    );
+    return <SummonerError title={error.title} message={error.message} />;
   }
 
   if (baseLoading || !summonerData || !championMasteryData) {

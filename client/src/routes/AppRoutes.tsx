@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import RootLayout from "@/components/layout/RootLayout";
 import Home from "@/pages/Home";
 import Summoner from "@/pages/Summoner";
+import NotFound from "@/pages/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
           element={<Summoner />}
         />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
