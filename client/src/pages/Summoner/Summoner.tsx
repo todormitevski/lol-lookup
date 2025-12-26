@@ -3,6 +3,7 @@ import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
 import RankStats from "@/components/ui/RankStats";
 import MatchList from "@/components/ui/MatchList";
 import SummonerError from "@/components/ui/SummonerError";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useApi from "@/hooks/useApi";
 
 import classes from "./Summoner.module.css";
@@ -29,11 +30,7 @@ export default function Summoner() {
   }
 
   if (baseLoading || !summonerData || !championMasteryData) {
-    return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
