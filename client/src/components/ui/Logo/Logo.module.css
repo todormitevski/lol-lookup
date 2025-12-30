@@ -15,6 +15,7 @@
   line-height: 1;
   letter-spacing: 2px;
   color: var(--color-text-primary);
+  transform: translateY(+5.4%);
 }
 
 .default h1 {

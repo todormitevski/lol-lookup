@@ -29,10 +29,16 @@ export default function SearchBar({ size = "default" }: Props) {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const [gameName, tagLine] = searchInput
-      .trim()
+    const trimmedSearchInput = searchInput.trim();
+
+    if (!trimmedSearchInput) {
+      return;
+    }
+
+    const [gameName, tagLine] = trimmedSearchInput
       .split("#")
       .map((s) => s.trim());
+
     navigate(`/summoner/${regionValue}/${gameName}/${tagLine}`);
   }
 
@@ -41,7 +47,11 @@ export default function SearchBar({ size = "default" }: Props) {
       className={`${classes.searchBar} ${classes[size]}`}
       onSubmit={handleSubmit}
     >
-      <select value={regionValue} onChange={handleRegionChange}>
+      <select
+        id="region-select"
+        value={regionValue}
+        onChange={handleRegionChange}
+      >
         {REGION_DROPDOWN_OPTIONS.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
@@ -49,6 +59,7 @@ export default function SearchBar({ size = "default" }: Props) {
         ))}
       </select>
       <input
+        id="summoner-input"
         type="text"
         placeholder={`Summoner game name + #${getRegionDefaultTagLineValue(
           regionValue
