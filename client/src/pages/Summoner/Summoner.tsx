@@ -34,13 +34,13 @@ export default function Summoner() {
   }
 
   return (
-    <section>
-      <div className={classes.placeholderColumn}>
-        <BaseSummonerHero
-          data={summonerData}
-          mainChampId={championMasteryData.mainChampionId}
-        />
-        <div className={classes.placeholderRow}>
+    <section className={classes.summonerPage}>
+      <BaseSummonerHero
+        data={summonerData}
+        mainChampId={championMasteryData.mainChampionId}
+      />
+      <div className={classes.contentContainer}>
+        <div className={classes.statsRow}>
           <RankStats loading={rankLoading} data={rankData} />
           <MatchList data={matchIdsData} />
         </div>

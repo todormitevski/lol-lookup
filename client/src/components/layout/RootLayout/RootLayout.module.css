@@ -7,7 +7,7 @@
 
 .mainContent {
   width: 100%;
-  padding: 0 var(--spacing-md);
+  padding: 0;
   display: flex;
   flex: 1;
   justify-content: center;
@@ -15,6 +15,6 @@
 
 @media (max-width: 768px) {
   .mainContent {
-    padding: 0 var(--spacing-sm);
+    padding: 0;
   }
 }
