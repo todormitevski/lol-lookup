@@ -8,5 +8,6 @@ export {
 } from "./regionTypes";
 export type { default as SummonerDto } from "./summonerTypes";
 export type * from "./rankTypes";
+export { RANK_ICONS, getRankIconUrl, formatRankValue } from "./rankTypes";
 export type * from "./matchTypes";
 export type { ChampionMasteryDto } from "./championMasteryTypes";

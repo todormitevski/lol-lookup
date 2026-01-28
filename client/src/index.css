@@ -47,6 +47,8 @@
   --color-accent: #c79b3b;
   --color-accent-hover: #d4aa4a;
   --color-border: #303030;
+  --color-victory: #5383e8;
+  --color-defeat: #e84057;
 
   --font-logo: "Bebas Neue", sans-serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
