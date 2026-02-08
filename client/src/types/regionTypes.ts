@@ -74,10 +74,32 @@ export const REGION_DISPLAY_VALUES: Record<string, string> = {
   oc1: "OCE",
 };
 
+export const REGION_API_VALUES: Record<string, Region> = {
+  eun1: "eun",
+  euw1: "euw",
+  tr1: "tr",
+  ru: "ru",
+  na1: "na",
+  br1: "br",
+  la1: "lan",
+  la2: "las",
+  kr: "kr",
+  jp1: "jp",
+  me1: "me",
+  sg2: "sg",
+  tw2: "tw",
+  vn2: "vn",
+  oc1: "oce",
+};
+
 export function getRegionDefaultTagLineValue(regionValue: Region): string {
   return REGION_DEFAULT_TAGLINE_VALUES[regionValue] || "EUNE";
 }
 
 export function getRegionDisplayValue(regionValue: string): string {
   return REGION_DISPLAY_VALUES[regionValue] || "EUNE";
+}
+
+export function getRegionApiValue(regionValue: string): Region {
+  return REGION_API_VALUES[regionValue] || "eun";
 }

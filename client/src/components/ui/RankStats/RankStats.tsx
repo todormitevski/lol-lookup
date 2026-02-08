@@ -1,19 +1,13 @@
-import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import RankedQueueCard from "@/components/ui/RankedQueueCard";
 import { type RankDto } from "@/types";
 
 import classes from "./RankStats.module.css";
 
 type Props = {
-  loading: boolean;
-  data: RankDto | null;
+  data: RankDto;
 };
 
-export default function RankStats({ loading, data }: Props) {
-  if (loading || !data) {
-    return <LoadingSpinner variant="centered" />;
-  }
-
+export default function RankStats({ data }: Props) {
   const soloDuoData = data.soloDuo;
   const flexData = data.flex;
 

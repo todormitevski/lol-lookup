@@ -26,7 +26,7 @@ type ApiHookResult = {
 export default function useApi(
   region: string | undefined,
   gameName: string | undefined,
-  tagLine: string | undefined
+  tagLine: string | undefined,
 ): ApiHookResult {
   const [baseLoading, setBaseLoading] = useState<boolean>(true);
   const [rankLoading, setRankLoading] = useState<boolean>(false);
@@ -43,28 +43,36 @@ export default function useApi(
     async function fetchData() {
       try {
         setBaseLoading(true);
+
         setError(null);
 
+        setSummonerData(null);
+        setChampionMasteryData(null);
+        setRankData(null);
+        setMatchIdsData(null);
+
         const summonerRes = await api.get<SummonerDto>(
-          `/summoner/${region}/${gameName}/${tagLine}`
+          `/summoner/${region}/${gameName}/${tagLine}`,
         );
-        setSummonerData(summonerRes.data);
 
         const { puuid } = summonerRes.data;
 
         const championMasteryRes = await api.get<ChampionMasteryDto>(
-          `/summoner/main-champion/${region}/${puuid}`
+          `/summoner/main-champion/${region}/${puuid}`,
         );
+
+        setSummonerData(summonerRes.data);
         setChampionMasteryData(championMasteryRes.data);
 
         setBaseLoading(false);
-
+        
         setRankLoading(true);
 
         const [rankRes, matchIdsRes] = await Promise.all([
           api.get<RankDto>(`/summoner/rank/${region}/${puuid}`),
           api.get<MatchIds>(`/summoner/matches/${region}/${puuid}`),
         ]);
+
         setRankData(rankRes.data);
         setMatchIdsData(matchIdsRes.data);
 

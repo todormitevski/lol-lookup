@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import { useParams } from "react-router";
 import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
 import RankStats from "@/components/ui/RankStats";
@@ -5,6 +6,7 @@ import MatchList from "@/components/ui/MatchList";
 import SummonerError from "@/components/ui/SummonerError";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useApi from "@/hooks/useApi";
+import { getRegionApiValue } from "@/types";
 
 import classes from "./Summoner.module.css";
 
@@ -33,6 +35,31 @@ export default function Summoner() {
     return <LoadingSpinner />;
   }
 
+  let rankContent: JSX.Element | null = null;
+
+  if (rankLoading || !rankData) {
+    rankContent = <LoadingSpinner variant="centered" />;
+  } else {
+    rankContent = <RankStats data={rankData} />;
+  }
+
+  let matchContent: JSX.Element | null = null;
+  const summonerRiotId = summonerData.gameName + "#" + summonerData.tagLine;
+
+  if (!matchIdsData) {
+    matchContent = <LoadingSpinner variant="centered" />;
+  } else {
+    const regionApiValue = getRegionApiValue(summonerData.region);
+
+    matchContent = (
+      <MatchList
+        data={matchIdsData}
+        region={regionApiValue}
+        riotId={summonerRiotId}
+      />
+    );
+  }
+
   return (
     <section className={classes.summonerPage}>
       <BaseSummonerHero
@@ -41,8 +68,8 @@ export default function Summoner() {
       />
       <div className={classes.contentContainer}>
         <div className={classes.statsRow}>
-          <RankStats loading={rankLoading} data={rankData} />
-          <MatchList data={matchIdsData} />
+          {rankContent}
+          {matchContent}
         </div>
       </div>
     </section>
