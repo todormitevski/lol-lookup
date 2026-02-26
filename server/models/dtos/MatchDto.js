@@ -4,6 +4,7 @@ class MatchDto {
     const info = matchData.info;
 
     this.matchId = metadata.matchId;
+    this.queueId = info.queueId;
     this.gameMode = info.gameMode;
     this.startTimestamp = info.gameCreation;
     this.duration = info.gameDuration;
@@ -14,6 +15,7 @@ class MatchDto {
       level: p.summonerLevel,
       position: p.teamPosition,
       win: p.win,
+      isEarlySurrender: p.gameEndedInEarlySurrender,
       champion: {
         id: p.championId,
         name: p.championName,

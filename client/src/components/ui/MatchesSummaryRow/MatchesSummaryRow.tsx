@@ -1,8 +1,9 @@
-import DonutChart from "@/components/ui/DonutChart";
 import type { SummaryDTO } from "@/types";
+import { getKdaQuality } from "@/utils";
+import DonutChart from "@/components/ui/DonutChart";
+import { useEffect, useState } from "react";
 
 import classes from "./MatchesSummaryRow.module.css";
-import { useEffect, useState } from "react";
 
 type Props = {
   data: SummaryDTO;
@@ -34,6 +35,8 @@ export default function MatchesSummaryRow({ data }: Props) {
     avgAssists,
   } = data;
 
+  const kdaQuality = getKdaQuality(avgKda);
+
   return (
     <div className={classes.summaryContainer}>
       <div className={classes.gamesSection}>
@@ -59,7 +62,7 @@ export default function MatchesSummaryRow({ data }: Props) {
 
       <div className={classes.kdaSection}>
         <p className={classes.kdaLabel}>Average KDA</p>
-        <p className={classes.kdaValue}>{avgKda}</p>
+        <p className={`${classes.kdaValue} ${classes[kdaQuality]}`}>{avgKda}</p>
         <p className={classes.kdaBreakdown}>
           {avgKills} / {avgDeaths} / {avgAssists}
         </p>

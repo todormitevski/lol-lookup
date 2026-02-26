@@ -1,4 +1,5 @@
-import { getRegionDisplayValue, type SummonerDto } from "@/types";
+import type { SummonerDto } from "@/types";
+import { getRegionDisplayValue } from "@/utils";
 import { useEffect, useState } from "react";
 import { getChampionNameById } from "@/services/dataDragon";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";

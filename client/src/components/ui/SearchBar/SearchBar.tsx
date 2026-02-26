@@ -1,8 +1,5 @@
-import {
-  getRegionDefaultTagLineValue,
-  REGION_DROPDOWN_OPTIONS,
-  type Region,
-} from "@/types";
+import type { Region } from "@/types";
+import { getRegionDefaultTagLineValue, REGION_DROPDOWN_OPTIONS } from "@/utils";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 
@@ -61,9 +58,7 @@ export default function SearchBar({ size = "default" }: Props) {
       <input
         id="summoner-input"
         type="text"
-        placeholder={`Summoner game name + #${getRegionDefaultTagLineValue(
-          regionValue
-        )}`}
+        placeholder={`Summoner game name + #${getRegionDefaultTagLineValue(regionValue)}`}
         spellCheck={false}
         value={searchInput}
         onChange={handleSearchInputChange}

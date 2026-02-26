@@ -67,8 +67,23 @@
 .kdaValue {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-text-primary);
   margin: 0;
+}
+
+.defaultKda {
+  color: var(--color-text-primary);
+}
+
+.goodKda {
+  color: var(--color-good-kda);
+}
+
+.greatKda {
+  color: var(--color-great-kda);
+}
+
+.amazingKda {
+  color: var(--color-amazing-kda);
 }
 
 .kdaBreakdown {

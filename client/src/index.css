@@ -47,8 +47,16 @@
   --color-accent: #c79b3b;
   --color-accent-hover: #d4aa4a;
   --color-border: #303030;
+  --color-remake: #a1a1a1;
   --color-victory: #5383e8;
   --color-defeat: #e84057;
+  --color-card-remake: #313131;
+  --color-card-victory: #1e2f50;
+  --color-card-defeat: #46191f;
+  --color-highlight: rgba(255, 255, 255, 0.05);
+  --color-good-kda: #326dee;
+  --color-great-kda: #8a32ee;
+  --color-amazing-kda: #dd8725;
 
   --font-logo: "Bebas Neue", sans-serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
@@ -66,10 +74,15 @@ html[data-theme="light"] {
   --color-background-secondary: #ffffff;
   --color-background-searchbar-secondary: #e8e8e8;
   --color-text-primary: #1a1a1a;
-  --color-text-secondary: #666666;
+  --color-text-secondary: #646464;
   --color-accent: #b8860b;
   --color-accent-hover: #996f00;
   --color-border: #d0d0d0;
+  --color-remake: #5b5b5b;
+  --color-card-remake: #d1d1d1;
+  --color-card-victory: #7ea0e041;
+  --color-card-defeat: #e68b9941;
+  --color-highlight: rgba(0, 0, 0, 0.1);
 }
 
 *,

@@ -5,7 +5,7 @@ import type {
   RankDto,
   SummonerDto,
 } from "@/types";
-import { ApiError } from "@/utils/ApiError";
+import { ApiError } from "@/utils";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
@@ -65,7 +65,7 @@ export default function useApi(
         setChampionMasteryData(championMasteryRes.data);
 
         setBaseLoading(false);
-        
+
         setRankLoading(true);
 
         const [rankRes, matchIdsRes] = await Promise.all([

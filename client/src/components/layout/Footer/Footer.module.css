@@ -15,7 +15,7 @@
 
 @media (max-width: 768px) {
   .footer {
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-lg);
   }
 
   .footer p {

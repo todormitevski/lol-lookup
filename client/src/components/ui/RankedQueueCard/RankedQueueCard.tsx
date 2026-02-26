@@ -1,5 +1,6 @@
 import type { JSX } from "react";
-import { formatRankValue, getRankIconUrl, type QueueRankData } from "@/types";
+import type { QueueRankData } from "@/types";
+import { formatRankValue, getRankIconUrl } from "@/utils";
 
 import classes from "./RankedQueueCard.module.css";
 

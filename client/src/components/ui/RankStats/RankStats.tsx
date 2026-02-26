@@ -1,5 +1,5 @@
+import type { RankDto } from "@/types";
 import RankedQueueCard from "@/components/ui/RankedQueueCard";
-import { type RankDto } from "@/types";
 
 import classes from "./RankStats.module.css";
 

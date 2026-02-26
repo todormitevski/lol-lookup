@@ -1,0 +1,194 @@
+.expandedSection {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-secondary);
+}
+
+.detailTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.detailTable thead {
+  background-color: var(--color-background-secondary);
+}
+
+.detailTable thead th {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.tbodyRemake {
+  background-color: var(--color-card-remake);
+}
+
+.tbodyVictory {
+  background-color: var(--color-card-victory);
+}
+
+.tbodyDefeat {
+  background-color: var(--color-card-defeat);
+}
+
+.thParticipant {
+  width: 200px;
+}
+
+.thTextVictory {
+  color: var(--color-remake);
+}
+
+.thTextVictory {
+  color: var(--color-victory);
+}
+
+.thTextDefeat {
+  color: var(--color-defeat);
+}
+
+.detailRowLast td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.detailRowLast td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.detailRow td {
+  padding: 5px 10px;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.detailRowCurrent td {
+  background-color: var(--color-highlight);
+}
+
+.participantCell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.participantName {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.participantName:hover {
+  text-decoration: underline;
+}
+
+.participantNameCurrent {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.tdKda {
+  white-space: nowrap;
+}
+
+.tdKdaInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.kpText {
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+  font-size: 0.65rem;
+}
+
+.tdKdaTotal {
+  font-size: 0.65rem;
+}
+
+.defaultKda {
+  color: var(--color-text-secondary);
+}
+
+.goodKda {
+  color: var(--color-good-kda);
+}
+
+.greatKda {
+  color: var(--color-great-kda);
+}
+
+.amazingKda {
+  color: var(--color-amazing-kda);
+}
+
+.tdDamage,
+.tdGold,
+.tdCs,
+.tdVision {
+  white-space: nowrap;
+  font-size: 0.7rem;
+}
+
+.tdItems {
+  white-space: nowrap;
+}
+
+.itemsRowInline {
+  display: flex;
+  gap: 2px;
+}
+
+@media (max-width: 768px) {
+  .expandedSection {
+    overflow-x: auto;
+  }
+
+  .detailTable {
+    min-width: 700px;
+    table-layout: fixed;
+  }
+
+  .thParticipant {
+    width: 180px;
+  }
+
+  .thKda {
+    width: 100px;
+  }
+
+  .thDamage {
+    width: 80px;
+  }
+
+  .thGold {
+    width: 50px;
+  }
+
+  .thCs {
+    width: 50px;
+  }
+
+  .thVision {
+    width: 50px;
+  }
+
+  .thItems {
+    width: 245px;
+  }
+
+  .participantName {
+    max-width: 70px;
+  }
+}

@@ -4,3 +4,39 @@
   flex-direction: column;
   gap: var(--spacing-md);
 }
+
+.matchesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.noRecentMatches {
+  width: 100%;
+  margin-top: var(--spacing-2xl);
+  display: flex;
+  justify-content: center;
+}
+
+.noRecentMatches h3 {
+  color: var(--color-text-secondary);
+}
+
+.loadMoreBtn {
+  width: auto;
+  height: 40px;
+  margin-top: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.loadMoreBtn:disabled {
+  cursor: default;
+}

@@ -1,12 +1,12 @@
 import type { JSX } from "react";
 import { useParams } from "react-router";
+import { getRegionApiValue } from "@/utils";
 import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
 import RankStats from "@/components/ui/RankStats";
 import MatchList from "@/components/ui/MatchList";
 import SummonerError from "@/components/ui/SummonerError";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useApi from "@/hooks/useApi";
-import { getRegionApiValue } from "@/types";
 
 import classes from "./Summoner.module.css";
 
