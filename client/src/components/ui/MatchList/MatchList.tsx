@@ -1,9 +1,10 @@
 import type { MatchDto, MatchIds } from "@/types";
-import { getSummaryData } from "@/utils";
+import { checkIsArenaMatch, getSummaryData } from "@/utils";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import MatchCard from "@/components/ui/MatchCard";
 import MatchesSummaryRow from "@/components/ui/MatchesSummaryRow";
 import api from "@/services/api";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 import classes from "./MatchList.module.css";
@@ -11,14 +12,16 @@ import classes from "./MatchList.module.css";
 type Props = {
   data: MatchIds;
   region: string;
-  riotId: string;
+  puuid: string;
 };
 
 const MATCHES_PER_LOAD = 5;
 
-export default function MatchList({ data, region, riotId }: Props) {
+export default function MatchList({ data, region, puuid }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [matches, setMatches] = useState<MatchDto[]>([]);
+  const [isRateLimitReached, setIsRateLimitReached] = useState<boolean>(false);
+  const [isNoMatchesLeft, setIsNoMatchesLeft] = useState<boolean>(false);
 
   const currentIndex = matches.length;
 
@@ -40,6 +43,7 @@ export default function MatchList({ data, region, riotId }: Props) {
     const matchesLeft = data.count - startIndex;
 
     if (matchesLeft <= 0) {
+      setIsNoMatchesLeft(true);
       return;
     }
 
@@ -57,8 +61,15 @@ export default function MatchList({ data, region, riotId }: Props) {
       );
 
       setMatches((prev) => [...prev, ...matchesData]);
+      setIsRateLimitReached(false);
     } catch (error) {
       console.error("Error fetching matches: ", error);
+
+      if (error instanceof AxiosError) {
+        if (error.status === 429) {
+          setIsRateLimitReached(true);
+        }
+      }
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +91,7 @@ export default function MatchList({ data, region, riotId }: Props) {
     return <LoadingSpinner variant="centered" />;
   }
 
-  const summaryData = getSummaryData(matches, riotId);
+  const summaryData = getSummaryData(matches, puuid);
 
   return (
     <div className={classes.matchListContainer}>
@@ -91,22 +102,28 @@ export default function MatchList({ data, region, riotId }: Props) {
           // currently not displayed correctly
           // layout needs to be 8 teams of 2 players, 16 players total
           // instead of the regular 2 teams of 5 players
-          .filter((m) => m.queueId !== 1700 && m.queueId !== 1710)
+          .filter((m) => !checkIsArenaMatch(m.queueId))
           .map((matchData) => (
             <MatchCard
               key={matchData.matchId}
               data={matchData}
               region={region}
-              riotId={riotId}
+              puuid={puuid}
             />
           ))}
 
         <button
           onClick={handleLoadMore}
-          disabled={isLoading}
+          disabled={isLoading || isNoMatchesLeft}
           className={classes.loadMoreBtn}
         >
-          {isLoading ? <LoadingSpinner variant="small" /> : "Load More"}
+          {isLoading ? (
+            <LoadingSpinner variant="small" />
+          ) : !isRateLimitReached ? (
+            "Load More"
+          ) : (
+            "Too many requests"
+          )}
         </button>
       </div>
     </div>

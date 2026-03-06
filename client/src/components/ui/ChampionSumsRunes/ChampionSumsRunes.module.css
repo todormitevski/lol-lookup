@@ -100,3 +100,29 @@
     height: 48px;
   }
 }
+
+@media (max-width: 390px) {
+  .championBuild {
+    gap: 2px;
+  }
+
+  .champIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sumSpellIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .runeIconWrapper {
+    width: 18px;
+    height: 18px;
+  }
+
+  .runeIcon {
+    width: 14px;
+    height: 14px;
+  }
+}

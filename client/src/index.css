@@ -80,8 +80,8 @@ html[data-theme="light"] {
   --color-border: #d0d0d0;
   --color-remake: #5b5b5b;
   --color-card-remake: #d1d1d1;
-  --color-card-victory: #7ea0e041;
-  --color-card-defeat: #e68b9941;
+  --color-card-victory: #b8d4f5;
+  --color-card-defeat: #f5b8c5;
   --color-highlight: rgba(0, 0, 0, 0.1);
 }
 

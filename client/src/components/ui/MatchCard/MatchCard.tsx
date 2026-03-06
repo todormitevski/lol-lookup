@@ -7,27 +7,29 @@ import {
   formatTotalKda,
   getKdaQuality,
   getQueueIdValue,
+  getTeamMvp,
 } from "@/utils";
-import ChampionSumsRunes from "@/components/ChampionSumsRunes";
-import ItemSlot from "@/components/ItemSlot";
-import TeamDisplay from "@/components/TeamDisplay";
-import MatchExpansion from "@/components/MatchExpansion";
-import ExpandCardButton from "@/components/ExpandCardButton";
+import ChampionSumsRunes from "@/components/ui/ChampionSumsRunes";
+import ItemSlot from "@/components/ui/ItemSlot";
+import TeamDisplay from "@/components/ui/TeamDisplay";
+import MatchExpansion from "@/components/ui/MatchExpansion";
+import ExpandCardButton from "@/components/ui/ExpandCardButton";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 import classes from "./MatchCard.module.css";
 
 type Props = {
   data: MatchDto;
   region: string;
-  riotId: string;
+  puuid: string;
 };
 
-export default function MatchCard({ data, region, riotId }: Props) {
+export default function MatchCard({ data, region, puuid }: Props) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const summonerInMatch = data.participants.find((p) =>
-    checkIsCurrentSummoner(p.gameName, p.tagLine, riotId),
+    checkIsCurrentSummoner(p.puuid, puuid),
   );
 
   if (!summonerInMatch) {
@@ -65,12 +67,36 @@ export default function MatchCard({ data, region, riotId }: Props) {
 
   const items = summonerInMatch.items;
   const roleQuestItem = summonerInMatch.roleQuestItem;
+
   const blueTeam = data.participants.slice(0, 5);
   const redTeam = data.participants.slice(5, 10);
 
+  let blueMvpPuuid = "";
+  let redMvpPuuid = "";
+  if (!isRemake) {
+    blueMvpPuuid = getTeamMvp(blueTeam);
+    redMvpPuuid = getTeamMvp(redTeam);
+  }
+  const isMvp =
+    summonerInMatch.puuid === blueMvpPuuid ||
+    summonerInMatch.puuid === redMvpPuuid;
+  const mvpClass = isMvp
+    ? isVictory
+      ? classes.mvpVictory
+      : classes.mvpDefeat
+    : "";
+
   return (
     <>
-      <div className={`${classes.matchCard} ${outcomeClass}`}>
+      <motion.div
+        className={`${classes.matchCard} ${outcomeClass} ${mvpClass}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.4,
+          ease: "easeOut",
+        }}
+      >
         <div className={classes.mobileGameInfo}>
           <div className={classes.baselinePart}>
             <span className={`${classes.outcome} ${outcomeClass}`}>
@@ -146,8 +172,8 @@ export default function MatchCard({ data, region, riotId }: Props) {
           </div>
 
           <div className={`${classes.col} ${classes.colTeams}`}>
-            <TeamDisplay team={blueTeam} region={region} riotId={riotId} />
-            <TeamDisplay team={redTeam} region={region} riotId={riotId} />
+            <TeamDisplay team={blueTeam} region={region} puuid={puuid} />
+            <TeamDisplay team={redTeam} region={region} puuid={puuid} />
           </div>
 
           <div className={classes.desktopExpandBtn}>
@@ -157,15 +183,17 @@ export default function MatchCard({ data, region, riotId }: Props) {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {isExpanded && (
         <MatchExpansion
           blueTeam={blueTeam}
           redTeam={redTeam}
+          blueMvpPuuid={blueMvpPuuid}
+          redMvpPuuid={redMvpPuuid}
           isRemake={isRemake}
           region={region}
-          riotId={riotId}
+          puuid={puuid}
         />
       )}
     </>

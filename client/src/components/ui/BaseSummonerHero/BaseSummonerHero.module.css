@@ -114,7 +114,7 @@
   letter-spacing: 0.05em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .heroContainer {
     height: 150px;
   }
@@ -136,18 +136,78 @@
   }
 
   .summonerAlias {
-    padding-bottom: var(--spacing-xl);
+    padding-bottom: 2.2rem;
   }
 
   .riotId {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
   .tagLine {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .region {
     font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 410px) {
+  .summonerIcon {
+    width: 88px;
+    height: 88px;
+  }
+
+  .riotId {
+    font-size: 1.125rem;
+  }
+
+  .tagLine {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .summonerIcon {
+    width: 85px;
+    height: 85px;
+  }
+
+  .riotId {
+    font-size: 1.1rem;
+  }
+
+  .tagLine {
+    font-size: 0.925rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .summonerIcon {
+    width: 82.5px;
+    height: 82.5px;
+  }
+
+  .riotId {
+    font-size: 1rem;
+  }
+
+  .tagLine {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .summonerIcon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .riotId {
+    font-size: 0.975rem;
+  }
+
+  .tagLine {
+    font-size: 0.8rem;
   }
 }

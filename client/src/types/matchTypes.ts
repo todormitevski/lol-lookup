@@ -28,6 +28,11 @@ export type Participant = {
   largestMultiKill: number;
   cs: number;
   totalDamageToChampions: number;
+  totalDamageToObjectives: number;
+  totalDamageShieldedOnTeammates: number;
+  totalHealsOnTeammates: number;
+  timeCCingOthers: number;
+  objectivesStolen: number;
   gold: number;
   visionScore: number;
   items: number[];

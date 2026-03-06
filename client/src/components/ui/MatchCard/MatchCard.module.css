@@ -20,11 +20,77 @@
   border-left-color: var(--color-defeat);
 }
 
+.mvpVictory,
+.mvpDefeat {
+  position: relative;
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.mvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #2a4a7c 50%,
+    #3d67b8 65%,
+    var(--color-card-victory) 100%
+  );
+  border-top: 1px solid var(--color-victory);
+  border-right: 1px solid var(--color-victory);
+  border-bottom: 1px solid var(--color-victory);
+}
+
+.mvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #6b2630 50%,
+    #a03a4d 65%,
+    var(--color-card-defeat) 100%
+  );
+  border-top: 1px solid var(--color-defeat);
+  border-right: 1px solid var(--color-defeat);
+  border-bottom: 1px solid var(--color-defeat);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+html[data-theme="light"] .mvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #e0ecfa 50%,
+    #f0f6fd 65%,
+    var(--color-card-victory) 100%
+  );
+}
+
+html[data-theme="light"] .mvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #fae0e7 50%,
+    #fdf0f3 65%,
+    var(--color-card-defeat) 100%
+  );
+}
+
 .cardRow {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 10px 12px;
-  gap: 20px;
 }
 
 .col {
@@ -81,7 +147,6 @@
 }
 
 .colChampion {
-  margin-left: var(--spacing-md);
   width: auto;
 }
 
@@ -156,15 +221,13 @@
 }
 
 .colTeams {
-  margin-left: var(--spacing-md);
-  flex-direction: row;
-  gap: 6px;
-  flex-shrink: 1;
   min-width: 0;
+  flex-direction: row;
+  flex-shrink: 1;
+  gap: 6px;
 }
 
 .desktopExpandBtn {
-  margin-left: auto;
   display: flex;
 }
 
@@ -172,10 +235,6 @@
   .cardRow {
     gap: 14px;
     padding: var(--spacing-xs) 16px 8px 16px;
-  }
-
-  .colChampion {
-    margin-left: 0px;
   }
 
   .mobileGameInfo {
@@ -208,15 +267,57 @@
     width: auto;
   }
 
-  .colItems {
-    margin-left: auto;
-  }
-
   .colTeams {
     display: none;
   }
 
   .desktopExpandBtn {
     display: none;
+  }
+}
+
+@media (max-width: 410px) {
+  .csVision {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .kdaSeparate {
+    gap: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .kdaTotal {
+    font-size: 0.69rem;
+    font-weight: 500;
+  }
+
+  .mobilePart {
+    gap: 6px;
+  }
+
+  .baselinePart {
+    gap: 6px;
+  }
+
+  .outcome {
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+
+  .gameMode {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .duration {
+    font-size: 0.65rem;
+  }
+
+  .timestamp {
+    font-size: 0.65rem;
   }
 }

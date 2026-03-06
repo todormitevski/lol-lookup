@@ -44,7 +44,7 @@ export default function Summoner() {
   }
 
   let matchContent: JSX.Element | null = null;
-  const summonerRiotId = summonerData.gameName + "#" + summonerData.tagLine;
+  const summonerPuuid = summonerData.puuid;
 
   if (!matchIdsData) {
     matchContent = <LoadingSpinner variant="centered" />;
@@ -55,7 +55,7 @@ export default function Summoner() {
       <MatchList
         data={matchIdsData}
         region={regionApiValue}
-        riotId={summonerRiotId}
+        puuid={summonerPuuid}
       />
     );
   }

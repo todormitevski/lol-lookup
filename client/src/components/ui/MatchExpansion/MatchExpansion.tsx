@@ -6,25 +6,30 @@ import {
   formatTotalKda,
   getKdaQuality,
 } from "@/utils";
-import classes from "./MatchExpansion.module.css";
-import ChampionSumsRunes from "@/components/ChampionSumsRunes";
-import ItemSlot from "@/components/ItemSlot";
+import ChampionSumsRunes from "@/components/ui/ChampionSumsRunes";
+import ItemSlot from "@/components/ui/ItemSlot";
 import { Link } from "react-router";
+
+import classes from "./MatchExpansion.module.css";
 
 type Props = {
   blueTeam: Participant[];
   redTeam: Participant[];
+  blueMvpPuuid: string;
+  redMvpPuuid: string;
   isRemake: boolean;
   region: string;
-  riotId: string;
+  puuid: string;
 };
 
 export default function MatchExpansion({
   blueTeam,
   redTeam,
+  blueMvpPuuid,
+  redMvpPuuid,
   isRemake,
   region,
-  riotId,
+  puuid,
 }: Props) {
   return (
     <div className={classes.expandedSection}>
@@ -60,13 +65,17 @@ export default function MatchExpansion({
             </thead>
             <tbody className={tbodyClass}>
               {team.map((p) => {
-                const isCurrent = checkIsCurrentSummoner(
-                  p.gameName,
-                  p.tagLine,
-                  riotId,
-                );
+                const isCurrent = checkIsCurrentSummoner(p.puuid, puuid);
+                const isBot = p.puuid === "BOT";
 
-                const isLast = p.puuid === redTeam[4].puuid;
+                const isMvp =
+                  !isBot &&
+                  (p.puuid === blueMvpPuuid || p.puuid === redMvpPuuid);
+                const mvpClass = isMvp
+                  ? isWin
+                    ? classes.detailRowMvpVictory
+                    : classes.detailRowMvpDefeat
+                  : "";
 
                 const formattedKda = formatTotalKda(
                   p.kda.totalKda,
@@ -86,8 +95,8 @@ export default function MatchExpansion({
 
                 return (
                   <tr
-                    key={p.puuid}
-                    className={`${classes.detailRow} ${isCurrent ? classes.detailRowCurrent : ""} ${isLast ? classes.detailRowLast : ""}`}
+                    key={!isBot ? p.puuid : `${p.puuid}-${p.position}`}
+                    className={`${classes.detailRow} ${isCurrent ? classes.detailRowCurrent : ""} ${mvpClass}`}
                   >
                     <td className={classes.tdParticipant}>
                       <div className={classes.participantCell}>

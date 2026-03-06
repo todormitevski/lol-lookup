@@ -39,4 +39,5 @@
 
 .loadMoreBtn:disabled {
   cursor: default;
+  color: var(--color-text-secondary);
 }

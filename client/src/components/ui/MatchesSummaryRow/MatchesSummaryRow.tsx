@@ -14,7 +14,7 @@ export default function MatchesSummaryRow({ data }: Props) {
 
   useEffect(() => {
     function checkMobile() {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1200);
     }
 
     checkMobile();

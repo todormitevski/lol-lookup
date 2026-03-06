@@ -12,6 +12,12 @@
   font-size: 0.72rem;
 }
 
+.detailTable:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
 .detailTable thead {
   background-color: var(--color-background-secondary);
 }
@@ -54,14 +60,6 @@
   color: var(--color-defeat);
 }
 
-.detailRowLast td:first-child {
-  border-bottom-left-radius: 8px;
-}
-
-.detailRowLast td:last-child {
-  border-bottom-right-radius: 8px;
-}
-
 .detailRow td {
   padding: 5px 10px;
   color: var(--color-text-secondary);
@@ -71,6 +69,63 @@
 
 .detailRowCurrent td {
   background-color: var(--color-highlight);
+}
+
+.detailRowMvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #2a4a7c 50%,
+    #3d67b8 65%,
+    var(--color-card-victory) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.detailRowMvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #6b2630 50%,
+    #a03a4d 65%,
+    var(--color-card-defeat) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+html[data-theme="light"] .detailRowMvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #d0e3f8 50%,
+    #e5f0fc 65%,
+    var(--color-card-victory) 100%
+  );
+}
+
+html[data-theme="light"] .detailRowMvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #f8d0db 50%,
+    #fce5ed 65%,
+    var(--color-card-defeat) 100%
+  );
 }
 
 .participantCell {

@@ -1,29 +1,29 @@
 .summaryContainer {
   width: 100%;
   padding: var(--spacing-xs) var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-background-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
   gap: var(--spacing-lg);
+  background-color: var(--color-background-secondary);
 }
 
 .chartSection {
-  flex: 1;
   display: flex;
   justify-content: center;
+  flex: 1;
 }
 
 .gamesSection {
   min-height: 80px;
-  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
   text-align: left;
-  gap: var(--spacing-xs);
 }
 
 .gamesTotal {
@@ -36,23 +36,23 @@
 }
 
 .gamesWins {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-victory);
 }
 
 .gamesLosses {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-defeat);
 }
 
 .kdaSection {
-  flex: 1;
-  text-align: right;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  flex: 1;
+  text-align: right;
 }
 
 .kdaLabel {
@@ -65,7 +65,7 @@
 }
 
 .kdaValue {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0;
 }
@@ -93,7 +93,7 @@
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .summaryContainer {
     padding: 0 var(--spacing-md);
     gap: var(--spacing-sm);
@@ -101,6 +101,7 @@
 
   .gamesSection {
     min-height: auto;
+    gap: var(--spacing-xs);
   }
 
   .gamesTotal {
@@ -109,7 +110,7 @@
 
   .gamesWins,
   .gamesLosses {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
 
   .kdaLabel {
@@ -122,5 +123,41 @@
 
   .kdaBreakdown {
     font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 403px) {
+  .gamesTotal,
+  .gamesWins,
+  .gamesLosses,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.75rem;
+  }
+
+  .kdaValue {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 386px) {
+  .gamesTotal,
+  .gamesWins,
+  .gamesLosses,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.7rem;
+  }
+
+  .kdaValue {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .gamesTotal,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.6rem;
   }
 }

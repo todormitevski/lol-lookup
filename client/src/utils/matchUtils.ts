@@ -1,18 +1,13 @@
-import type { MatchDto, SummaryDTO } from "@/types";
+import type { MatchDto, Participant, SummaryDTO } from "@/types";
 
 const PATCH_VER = import.meta.env.VITE_PATCH_VER;
 
-export function getSummaryData(
-  matches: MatchDto[],
-  riotId: string,
-): SummaryDTO {
+export function getSummaryData(matches: MatchDto[], puuid: string): SummaryDTO {
   const summonerRecentMatchParticipations = matches
     // TODO: fix arena games
-    .filter((m) => m.queueId !== 1700 && m.queueId !== 1710)
+    .filter((m) => !checkIsArenaMatch(m.queueId))
     .flatMap((m) =>
-      m.participants.filter((p) =>
-        checkIsCurrentSummoner(p.gameName, p.tagLine, riotId),
-      ),
+      m.participants.filter((p) => checkIsCurrentSummoner(p.puuid, puuid)),
     );
 
   const reducedSummary = summonerRecentMatchParticipations.reduce(
@@ -150,6 +145,10 @@ export const RUNE_ICON_VALUES: Record<number, string> = {
   8400: "7204_Resolve",
   8200: "7202_Sorcery",
 };
+
+export function checkIsArenaMatch(queueId: number) {
+  return queueId === 1700 || queueId === 1710;
+}
 
 export function getQueueIdValue(id: number): string {
   return QUEUE_ID_VALUES[id] || "";
@@ -294,11 +293,10 @@ export function formatTotalKda(
 }
 
 export function checkIsCurrentSummoner(
-  gameName: string,
-  tagLine: string,
-  riotId: string,
+  participantPuuid: string,
+  currentSummonerPuuid: string,
 ): boolean {
-  return gameName + "#" + tagLine === riotId;
+  return participantPuuid === currentSummonerPuuid;
 }
 
 export function checkIsRemake(
@@ -306,4 +304,46 @@ export function checkIsRemake(
   duration: number,
 ): boolean {
   return isEarlySurrender && duration <= 174;
+}
+
+export function calculateWeightedScore(p: Participant): number {
+  const isSupport = p.position === "UTILITY";
+
+  const normalizedDamageToChampions = p.totalDamageToChampions / 100;
+  const normalizedDamageToObjectives = p.totalDamageToObjectives / 100;
+  const normalizedShieldingTeammates = p.totalDamageShieldedOnTeammates / 100;
+  const normalizedHealingTeammates = p.totalHealsOnTeammates / 100;
+  const normalizedGold = p.gold / 100;
+
+  const shieldingWeight = !isSupport ? 2 : 4;
+  const healingWeight = !isSupport ? 2 : 4;
+  const csWeight = !isSupport ? 0.5 : 0.1;
+  const visionWeight = !isSupport ? 4 : 6;
+  const timeCcingWeight = !isSupport ? 4 : 6;
+
+  const score =
+    p.kda.kills * 5 +
+    p.kda.deaths * -4 +
+    p.kda.assists * 3 +
+    p.kp * 200 +
+    p.largestMultiKill * 15 +
+    normalizedDamageToChampions * 2 +
+    normalizedDamageToObjectives * 0.8 +
+    normalizedShieldingTeammates * shieldingWeight +
+    normalizedHealingTeammates * healingWeight +
+    normalizedGold +
+    p.timeCCingOthers * timeCcingWeight +
+    p.objectivesStolen * 80 +
+    p.visionScore * visionWeight +
+    p.cs * csWeight;
+
+  return Math.round(score);
+}
+
+export function getTeamMvp(team: Participant[]): string {
+  const teamScores = team
+    .map((p) => ({ puuid: p.puuid, score: calculateWeightedScore(p) }))
+    .sort((a, b) => b.score - a.score);
+
+  return teamScores[0].puuid;
 }
