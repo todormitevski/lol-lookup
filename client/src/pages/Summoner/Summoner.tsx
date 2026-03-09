@@ -4,6 +4,7 @@ import { getRegionApiValue } from "@/utils";
 import BaseSummonerHero from "@/components/ui/BaseSummonerHero";
 import RankStats from "@/components/ui/RankStats";
 import MatchList from "@/components/ui/MatchList";
+import ColdStartNotice from "@/components/ui/ColdStartNotice";
 import SummonerError from "@/components/ui/SummonerError";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import useApi from "@/hooks/useApi";
@@ -28,6 +29,10 @@ export default function Summoner() {
   } = packedData;
 
   if (error) {
+    if (error.isColdStart) {
+      return <ColdStartNotice title={error.title} message={error.message} />;
+    }
+
     return <SummonerError title={error.title} message={error.message} />;
   }
 

@@ -6,7 +6,7 @@ import type {
   SummonerDto,
 } from "@/types";
 import { ApiError } from "@/utils";
-import { AxiosError } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 type PackedData = {
@@ -55,6 +55,12 @@ export default function useApi(
           `/summoner/${region}/${gameName}/${tagLine}`,
         );
 
+        if (checkIsColdStartSuccess(summonerRes)) {
+          return setError(
+            new ApiError("Server starting", "Estimated time: 60s", true),
+          );
+        }
+
         const { puuid } = summonerRes.data;
 
         const championMasteryRes = await api.get<ChampionMasteryDto>(
@@ -79,6 +85,12 @@ export default function useApi(
         setRankLoading(false);
       } catch (error) {
         if (error instanceof AxiosError) {
+          if (checkIsColdStartError(error)) {
+            return setError(
+              new ApiError("Server starting", "Estimated time: 60s", true),
+            );
+          }
+
           const title = error.response?.data.error || "Not Found";
           const message =
             error.response?.data.message ||
@@ -112,4 +124,16 @@ export default function useApi(
   };
 
   return { baseLoading, packedData, error };
+}
+
+function checkIsColdStartSuccess(res: AxiosResponse) {
+  return typeof res.data === "string" && res.data.includes("Render");
+}
+
+function checkIsColdStartError(error: AxiosError): boolean {
+  return (
+    error.code === "ECONNABORTED" ||
+    error.code === "ERR_NETWORK" ||
+    error.status === 503
+  );
 }

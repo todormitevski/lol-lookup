@@ -1,0 +1,14 @@
+.tabRow {
+  width: auto;
+  height: auto;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .tabRow {
+    display: none;
+  }
+}

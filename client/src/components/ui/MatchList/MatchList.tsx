@@ -1,8 +1,9 @@
 import type { MatchDto, MatchIds } from "@/types";
 import { checkIsArenaMatch, getSummaryData } from "@/utils";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import MatchCard from "@/components/ui/MatchCard";
+import TabRow from "@/components/ui/TabRow";
 import MatchesSummaryRow from "@/components/ui/MatchesSummaryRow";
+import MatchCard from "@/components/ui/MatchCard";
 import api from "@/services/api";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
@@ -95,6 +96,7 @@ export default function MatchList({ data, region, puuid }: Props) {
 
   return (
     <div className={classes.matchListContainer}>
+      <TabRow />
       <MatchesSummaryRow data={summaryData} />
       <div className={classes.matchesWrapper}>
         {matches
