@@ -1,5 +1,5 @@
 import ExpandCardButton from "@/components/ui/ExpandCardButton";
-import InfoWindow from "@/components/InfoWindow";
+import InfoWindow from "@/components/ui/InfoWindow";
 import { useState } from "react";
 
 import classes from "./InfoButton.module.css";
