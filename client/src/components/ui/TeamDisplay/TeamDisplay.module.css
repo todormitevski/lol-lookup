@@ -1,0 +1,47 @@
+.teamColumn {
+  width: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.teamParticipant {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.teamParticipantChampIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.teamParticipantChampIconCurrent {
+  border-radius: 50%;
+}
+
+.teamParticipantName {
+  font-size: 0.6rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 64px;
+}
+
+.teamParticipantName:hover {
+  text-decoration: underline;
+}
+
+.teamParticipantNameCurrent {
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .teamParticipantName {
+    max-width: 56px;
+  }
+}

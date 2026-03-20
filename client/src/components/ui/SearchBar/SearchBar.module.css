@@ -1,0 +1,141 @@
+.searchBar {
+  display: flex;
+  border: 1px solid var(--color-border);
+  flex-direction: row;
+}
+
+.searchBar:focus-within {
+  border-color: var(--color-accent);
+}
+
+.searchBar select {
+  border: none;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.searchBar select:focus {
+  outline: none;
+}
+
+.searchBar option {
+  font-weight: 600;
+}
+
+.searchBar input {
+  flex: 1;
+  border: none;
+  text-align: start;
+  text-indent: 1rem;
+  color: var(--color-text-primary);
+  background-color: transparent;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.searchBar button {
+  width: 80px;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.default {
+  width: 800px;
+  height: 50px;
+  background-color: var(--color-background-secondary);
+}
+
+.default select {
+  width: 80px;
+}
+
+.default option {
+  background-color: var(--color-background-secondary);
+}
+
+.default input {
+  font-size: 16px;
+}
+
+.small {
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: var(--color-background-searchbar-secondary);
+}
+
+.small select {
+  width: 80px;
+  font-size: 12px;
+}
+
+.small option {
+  background-color: var(--color-background-searchbar-secondary);
+}
+
+.small input {
+  font-size: 14px;
+}
+
+.small button {
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .searchBar {
+    max-width: 100%;
+  }
+
+  .searchBar select {
+    width: 70px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+  }
+
+  .searchBar input {
+    font-size: 0.8rem;
+  }
+
+  .searchBar button {
+    width: 70px;
+  }
+
+  .default {
+    height: 48px;
+  }
+
+  .small {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .default {
+    height: 44px;
+  }
+
+  .small {
+    height: 36px;
+    max-width: 100%;
+  }
+
+  .searchBar select {
+    padding: var(--spacing-xs);
+    font-size: 0.65rem;
+  }
+
+  .searchBar input {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .searchBar input {
+    font-size: 0.65rem;
+  }
+}

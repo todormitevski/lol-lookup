@@ -1,0 +1,128 @@
+.championBuild {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.champIconWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.champIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: block;
+}
+
+.champLevel {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.summonerSpells {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sumSpellIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  display: block;
+}
+
+.runes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.runeIconWrapper {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.runeIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.buildSmall .champIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.buildSmall .champLevel {
+  min-width: 14px;
+  height: 14px;
+  font-size: 0.5rem;
+}
+
+.buildSmall .sumSpellIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.buildSmall .runeIconWrapper {
+  width: 16px;
+  height: 16px;
+}
+
+.buildSmall .runeIcon {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 768px) {
+  .champIcon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 390px) {
+  .championBuild {
+    gap: 2px;
+  }
+
+  .champIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sumSpellIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .runeIconWrapper {
+    width: 18px;
+    height: 18px;
+  }
+
+  .runeIcon {
+    width: 14px;
+    height: 14px;
+  }
+}

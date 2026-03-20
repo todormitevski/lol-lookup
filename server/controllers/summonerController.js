@@ -20,6 +20,21 @@ exports.getSummoner = async (req, res) => {
   try {
     const { region, gameName, tagLine } = req.params;
 
+    if (
+      !region ||
+      !gameName ||
+      !tagLine ||
+      region === "undefined" ||
+      gameName === "undefined" ||
+      tagLine === "undefined"
+    ) {
+      return res.status(400).json({
+        error: "Summoner does not exist",
+        message:
+          "Make sure to enter valid values for summoner. Example format: SummonerGameName#TagLine",
+      });
+    }
+
     const cacheKey = generateCacheKey(region, gameName, tagLine);
 
     if (summonerCache.has(cacheKey)) {
@@ -73,6 +88,13 @@ exports.getRank = async (req, res) => {
   try {
     const { region, puuid } = req.params;
 
+    if (!region || !puuid || region === "undefined" || puuid === "undefined") {
+      return res.status(400).json({
+        error: "Rank data not found, invalid PUUID",
+        message: "Invalid params provided for getRank",
+      });
+    }
+
     const cacheKey = generateCacheKey(region, puuid);
 
     if (rankCache.has(cacheKey)) {
@@ -96,6 +118,13 @@ exports.getRank = async (req, res) => {
 exports.getMatchIds = async (req, res) => {
   try {
     const { region, puuid } = req.params;
+
+    if (!region || !puuid || region === "undefined" || puuid === "undefined") {
+      return res.status(400).json({
+        error: "MatchIds data not found, invalid PUUID",
+        message: "Invalid params provided for getMatchIds",
+      });
+    }
 
     const cacheKey = generateCacheKey(region, puuid);
 
@@ -127,6 +156,18 @@ exports.getMatch = async (req, res) => {
   try {
     const { region, matchId } = req.params;
 
+    if (
+      !region ||
+      !matchId ||
+      region === "undefined" ||
+      matchId === "undefined"
+    ) {
+      return res.status(400).json({
+        error: "Match data not found, invalid matchId",
+        message: "Invalid params provided for getMatch",
+      });
+    }
+
     const cacheKey = generateCacheKey(region, matchId);
 
     if (matchCache.has(cacheKey)) {
@@ -150,6 +191,13 @@ exports.getMatch = async (req, res) => {
 exports.getMainChampion = async (req, res) => {
   try {
     const { region, puuid } = req.params;
+
+    if (!region || !puuid || region === "undefined" || puuid === "undefined") {
+      return res.status(400).json({
+        error: "ChampionMastery data not found, invalid PUUID",
+        message: "Invalid params provided for getMainChampion",
+      });
+    }
 
     const cacheKey = generateCacheKey(region, puuid);
 

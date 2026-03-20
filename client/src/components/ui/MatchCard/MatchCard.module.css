@@ -1,0 +1,323 @@
+.matchCard {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+}
+
+.matchCard.remake {
+  background-color: var(--color-card-remake);
+  border-left-color: var(--color-remake);
+}
+
+.matchCard.victory {
+  background-color: var(--color-card-victory);
+  border-left-color: var(--color-victory);
+}
+
+.matchCard.defeat {
+  background-color: var(--color-card-defeat);
+  border-left-color: var(--color-defeat);
+}
+
+.mvpVictory,
+.mvpDefeat {
+  position: relative;
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.mvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #2a4a7c 50%,
+    #3d67b8 65%,
+    var(--color-card-victory) 100%
+  );
+  border-top: 1px solid var(--color-victory);
+  border-right: 1px solid var(--color-victory);
+  border-bottom: 1px solid var(--color-victory);
+}
+
+.mvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #6b2630 50%,
+    #a03a4d 65%,
+    var(--color-card-defeat) 100%
+  );
+  border-top: 1px solid var(--color-defeat);
+  border-right: 1px solid var(--color-defeat);
+  border-bottom: 1px solid var(--color-defeat);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+html[data-theme="light"] .mvpVictory {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-victory) 0%,
+    var(--color-card-victory) 35%,
+    #e0ecfa 50%,
+    #f0f6fd 65%,
+    var(--color-card-victory) 100%
+  );
+}
+
+html[data-theme="light"] .mvpDefeat {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-card-defeat) 0%,
+    var(--color-card-defeat) 35%,
+    #fae0e7 50%,
+    #fdf0f3 65%,
+    var(--color-card-defeat) 100%
+  );
+}
+
+.cardRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.mobileGameInfo {
+  display: none;
+}
+
+.colGameInfo {
+  width: 72px;
+  gap: 2px;
+}
+
+.gameMode {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.outcome {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.outcome.remake {
+  color: var(--color-remake);
+}
+
+.outcome.victory {
+  color: var(--color-victory);
+}
+
+.outcome.defeat {
+  color: var(--color-defeat);
+}
+
+.duration {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+}
+
+.timestamp {
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+.colChampion {
+  width: auto;
+}
+
+.colKda {
+  width: 96px;
+  align-items: center;
+  gap: 2px;
+}
+
+.kdaSeparate {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.killsAssists {
+  color: var(--color-text-primary);
+}
+
+.deaths {
+  color: var(--color-defeat);
+}
+
+.kdaSlash {
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.kdaTotal {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.defaultKda {
+  color: var(--color-text-secondary);
+}
+
+.goodKda {
+  color: var(--color-good-kda);
+}
+
+.greatKda {
+  color: var(--color-great-kda);
+}
+
+.amazingKda {
+  color: var(--color-amazing-kda);
+}
+
+.csVision {
+  display: flex;
+  gap: 8px;
+  font-size: 0.65rem;
+  color: var(--color-text-secondary);
+}
+
+.colItems {
+  width: auto;
+}
+
+.itemsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemsRow {
+  display: flex;
+  gap: 2px;
+}
+
+.colTeams {
+  min-width: 0;
+  flex-direction: row;
+  flex-shrink: 1;
+  gap: 6px;
+}
+
+.desktopExpandBtn {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .cardRow {
+    gap: 14px;
+    padding: var(--spacing-xs) 16px 8px 16px;
+  }
+
+  .mobileGameInfo {
+    padding: 8px 16px var(--spacing-xs) 16px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .mobilePart {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .baselinePart {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .colGameInfo {
+    display: none;
+  }
+
+  .colKda {
+    width: auto;
+  }
+
+  .colTeams {
+    display: none;
+  }
+
+  .desktopExpandBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 410px) {
+  .csVision {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .kdaSeparate {
+    gap: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .kdaTotal {
+    font-size: 0.69rem;
+    font-weight: 500;
+  }
+
+  .mobilePart {
+    gap: 6px;
+  }
+
+  .baselinePart {
+    gap: 6px;
+  }
+
+  .outcome {
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+
+  .gameMode {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .duration {
+    font-size: 0.65rem;
+  }
+
+  .timestamp {
+    font-size: 0.65rem;
+  }
+}

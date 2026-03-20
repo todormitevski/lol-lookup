@@ -1,0 +1,183 @@
+.rankCard {
+  width: 360px;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-background-secondary);
+}
+
+.queueName {
+  margin-bottom: var(--spacing-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+}
+
+.rankContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.rankIconWrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.rankIconBackground {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  background: linear-gradient(
+    135deg,
+    var(--color-background) 0%,
+    var(--color-border) 100%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.rankIcon {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.rankInfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.rankTier {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+}
+
+.rank {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-text-primary);
+}
+
+.division {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.unranked {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.lp {
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.winLossInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.winLoss {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+.wins {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.65rem;
+  color: var(--color-victory);
+}
+
+.losses {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.65rem;
+  color: var(--color-defeat);
+}
+
+.winRate {
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 1200px) {
+  .rankCard {
+    width: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .queueName {
+    font-size: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .rankContent {
+    gap: var(--spacing-md);
+  }
+
+  .rankIconWrapper {
+    width: 64px;
+    height: 64px;
+  }
+
+  .rankIconBackground {
+    width: 60px;
+    height: 60px;
+  }
+
+  .rankIcon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .rank,
+  .division {
+    font-size: 1rem;
+  }
+
+  .unranked {
+    font-size: 1rem;
+  }
+
+  .lp {
+    font-size: 0.8125rem;
+  }
+
+  .winLossInfo {
+    margin-right: 2px;
+  }
+
+  .wins,
+  .losses {
+    font-size: 0.875rem;
+  }
+
+  .winRate {
+    font-size: 0.8125rem;
+  }
+}
