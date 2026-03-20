@@ -9,6 +9,13 @@ type Props = {
   size?: "default" | "small";
 };
 
+const PLACEHOLDER_GAME_NAME = (
+  import.meta.env.VITE_PLACEHOLDER_GAME_NAME ?? ""
+).trim();
+const PLACEHOLDER_TAG_LINE = (
+  import.meta.env.VITE_PLACEHOLDER_TAG_LINE ?? ""
+).trim();
+
 export default function SearchBar({ size = "default" }: Props) {
   const [regionValue, setRegionValue] = useState<Region>("eun");
   const [searchInput, setSearchInput] = useState<string>("");
@@ -29,6 +36,15 @@ export default function SearchBar({ size = "default" }: Props) {
     const trimmedSearchInput = searchInput.trim();
 
     if (!trimmedSearchInput) {
+      if (isPlaceholderSummonerPresent) {
+        const encodedGameName = encodeURIComponent(PLACEHOLDER_GAME_NAME);
+        const encodedTagLine = encodeURIComponent(PLACEHOLDER_TAG_LINE);
+
+        navigate(
+          `/summoner/${regionValue}/${encodedGameName}/${encodedTagLine}`,
+        );
+      }
+
       return;
     }
 
@@ -36,8 +52,18 @@ export default function SearchBar({ size = "default" }: Props) {
       .split("#")
       .map((s) => s.trim());
 
-    navigate(`/summoner/${regionValue}/${gameName}/${tagLine}`);
+    const encodedGameName = encodeURIComponent(gameName);
+    const encodedTagLine = encodeURIComponent(tagLine);
+
+    navigate(`/summoner/${regionValue}/${encodedGameName}/${encodedTagLine}`);
   }
+
+  const isPlaceholderSummonerPresent = Boolean(
+    PLACEHOLDER_GAME_NAME && PLACEHOLDER_TAG_LINE,
+  );
+  const placeholderText = isPlaceholderSummonerPresent
+    ? `${PLACEHOLDER_GAME_NAME}#${PLACEHOLDER_TAG_LINE}`
+    : `Summoner game name + #${getRegionDefaultTagLineValue(regionValue)}`;
 
   return (
     <form
@@ -58,7 +84,7 @@ export default function SearchBar({ size = "default" }: Props) {
       <input
         id="summoner-input"
         type="text"
-        placeholder={`Summoner game name + #${getRegionDefaultTagLineValue(regionValue)}`}
+        placeholder={placeholderText}
         spellCheck={false}
         value={searchInput}
         onChange={handleSearchInputChange}
