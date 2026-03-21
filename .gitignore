@@ -1,6 +1,12 @@
 node_modules
 package-lock.json
 
+.env
+.env.development
+.env.production
+
+server/coverage/
+
 # Logs
 logs
 *.log

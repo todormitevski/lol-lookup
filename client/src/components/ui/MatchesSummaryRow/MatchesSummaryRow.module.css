@@ -1,0 +1,163 @@
+.summaryContainer {
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  background-color: var(--color-background-secondary);
+}
+
+.chartSection {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.gamesSection {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  text-align: left;
+}
+
+.gamesTotal {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.gamesWins {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-victory);
+}
+
+.gamesLosses {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-defeat);
+}
+
+.kdaSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+  text-align: right;
+}
+
+.kdaLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.kdaValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.defaultKda {
+  color: var(--color-text-primary);
+}
+
+.goodKda {
+  color: var(--color-good-kda);
+}
+
+.greatKda {
+  color: var(--color-great-kda);
+}
+
+.amazingKda {
+  color: var(--color-amazing-kda);
+}
+
+.kdaBreakdown {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .summaryContainer {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .gamesSection {
+    min-height: auto;
+    gap: var(--spacing-xs);
+  }
+
+  .gamesTotal {
+    font-size: 0.75rem;
+  }
+
+  .gamesWins,
+  .gamesLosses {
+    font-size: 0.8rem;
+  }
+
+  .kdaLabel {
+    font-size: 0.75rem;
+  }
+
+  .kdaValue {
+    font-size: 1rem;
+  }
+
+  .kdaBreakdown {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 403px) {
+  .gamesTotal,
+  .gamesWins,
+  .gamesLosses,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.75rem;
+  }
+
+  .kdaValue {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 386px) {
+  .gamesTotal,
+  .gamesWins,
+  .gamesLosses,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.7rem;
+  }
+
+  .kdaValue {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .gamesTotal,
+  .kdaLabel,
+  .kdaBreakdown {
+    font-size: 0.6rem;
+  }
+}

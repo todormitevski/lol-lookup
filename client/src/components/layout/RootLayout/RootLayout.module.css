@@ -1,0 +1,20 @@
+.rootWrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 0;
+  }
+}
