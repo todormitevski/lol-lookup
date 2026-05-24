@@ -61,7 +61,7 @@ export default function ChampionSumsRunes({
         </span>
 
         <span className={classes.runeIconWrapper}>
-          {participant.runes[0] !== undefined && participant.runes[0] !== 0 && (
+          {participant.runes[1] !== undefined && participant.runes[1] !== 0 && (
             <img
               className={classes.runeIcon}
               src={createRuneIconUrl(getRuneIconValue(participant.runes[1]))}

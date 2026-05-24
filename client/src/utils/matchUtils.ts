@@ -73,6 +73,7 @@ export const QUEUE_ID_VALUES: Record<number, string> = {
 
   1700: "Arena",
   1710: "Arena",
+  1750: "Arena",
 
   100: "ARAM",
   450: "ARAM",
@@ -137,7 +138,11 @@ export const RUNE_ICON_VALUES: Record<number, string> = {
 
   8214: "Sorcery/SummonAery/SummonAery",
   8229: "Sorcery/ArcaneComet/ArcaneComet",
-  8230: "Sorcery/PhaseRush/PhaseRush",
+  8230: "Sorcery/PhaseRush/StormraidersSurgeRuneIcon2",
+  8992: "Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE",
+
+  // removed in patch 26.9
+  // 8230: "Sorcery/PhaseRush/PhaseRush",
 
   8100: "7200_Domination",
   8300: "7203_Whimsy", //inspiration
@@ -147,7 +152,7 @@ export const RUNE_ICON_VALUES: Record<number, string> = {
 };
 
 export function checkIsArenaMatch(queueId: number) {
-  return queueId === 1700 || queueId === 1710;
+  return queueId === 1700 || queueId === 1710 || queueId === 1750;
 }
 
 export function getQueueIdValue(id: number): string {
@@ -177,7 +182,7 @@ export function getRuneIconValue(runeId: number): string {
 }
 
 export function createRuneIconUrl(runePathSegment: string): string {
-  return `https://ddragon.canisback.com/img/perk-images/Styles/${runePathSegment}.png`;
+  return `https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${runePathSegment}.png`;
 }
 
 export function createItemIconUrl(itemId: number): string {
