@@ -1,6 +1,6 @@
 import type { Region } from "@/types";
 import { getRegionDefaultTagLineValue, REGION_DROPDOWN_OPTIONS } from "@/utils";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 
 import classes from "./SearchBar.module.css";
@@ -19,6 +19,10 @@ const PLACEHOLDER_TAG_LINE = (
 export default function SearchBar({ size = "default" }: Props) {
   const [regionValue, setRegionValue] = useState<Region>("eun");
   const [searchInput, setSearchInput] = useState<string>("");
+  
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const regionDefaultTagLineValue = getRegionDefaultTagLineValue(regionValue);
 
   const navigate = useNavigate();
 
@@ -32,6 +36,7 @@ export default function SearchBar({ size = "default" }: Props) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    inputRef.current?.blur();
 
     const trimmedSearchInput = searchInput.trim();
 
@@ -53,7 +58,9 @@ export default function SearchBar({ size = "default" }: Props) {
       .map((s) => s.trim());
 
     const encodedGameName = encodeURIComponent(gameName);
-    const encodedTagLine = encodeURIComponent(tagLine);
+    const encodedTagLine = encodeURIComponent(tagLine || regionDefaultTagLineValue);
+
+    setSearchInput("");
 
     navigate(`/summoner/${regionValue}/${encodedGameName}/${encodedTagLine}`);
   }
@@ -63,7 +70,7 @@ export default function SearchBar({ size = "default" }: Props) {
   );
   const placeholderText = isPlaceholderSummonerPresent
     ? `${PLACEHOLDER_GAME_NAME}#${PLACEHOLDER_TAG_LINE}`
-    : `Summoner game name + #${getRegionDefaultTagLineValue(regionValue)}`;
+    : `Summoner game name + #${regionDefaultTagLineValue}`;
 
   return (
     <form
@@ -88,6 +95,7 @@ export default function SearchBar({ size = "default" }: Props) {
         spellCheck={false}
         value={searchInput}
         onChange={handleSearchInputChange}
+        ref={inputRef}
       />
       <button type="submit">GO</button>
     </form>
